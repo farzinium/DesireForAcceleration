@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Splines;
+using System.Collections.Generic;
 
 [DisallowMultipleComponent]
 public class RoadSegment : MonoBehaviour
@@ -27,6 +28,41 @@ public class RoadSegment : MonoBehaviour
     
     [HideInInspector]
     public SplineContainer spline;
+
+    [Header("Streaming")]
+    public List<Vector2Int> zones = new List<Vector2Int>();
+
+    public void AssignZones(float zoneSize)
+    {
+        zones.Clear();
+
+        // Sample the road mesh bounds
+        MeshFilter mf = GetComponent<MeshFilter>();
+        if (mf == null || mf.sharedMesh == null)
+            return;
+
+        Bounds b = mf.sharedMesh.bounds;
+        Vector3 worldCenter = transform.TransformPoint(b.center);
+
+        Vector2Int centerZone = ZoneUtility.GetZoneID(worldCenter, zoneSize);
+        zones.Add(centerZone);
+
+        // Sample corners for long curves
+        Vector3[] corners = new Vector3[]
+        {
+        transform.TransformPoint(b.min),
+        transform.TransformPoint(b.max),
+        transform.TransformPoint(new Vector3(b.min.x, 0, b.max.z)),
+        transform.TransformPoint(new Vector3(b.max.x, 0, b.min.z))
+        };
+
+        foreach (var p in corners)
+        {
+            Vector2Int id = ZoneUtility.GetZoneID(p, zoneSize);
+            if (!zones.Contains(id))
+                zones.Add(id);
+        }
+    }
 
     private void Reset()
     {
