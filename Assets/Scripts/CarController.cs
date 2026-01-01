@@ -1,9 +1,16 @@
 using System;
+using System.Diagnostics;
 using UnityEngine;
+using static UnityEngine.AdaptivePerformance.Provider.AdaptivePerformanceSubsystemDescriptor;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CarController : MonoBehaviour
 {
+    [Header("Camera Speed Effects")]
+    public float minFOV = 60f;
+    public float maxFOV = 80f;
+    public float maxSpeedForFOV = 60f; // m/s (~216 km/h)
+    public float maxCameraBackOffset = 1.5f;
     public Camera playerCamera;
     public GameObject brakeLight;
     public Material braking, nonBraking;
@@ -11,7 +18,13 @@ public class CarController : MonoBehaviour
     [Header("Car Settings")]
     public float driftFactor = 0.95f; // Lower = more drift
 
+    [Header("Speedometer")]
+    public bool useKMH = true;
+    private float speed;
+    
     [Header("Engine")]
+    public float engineHighpitch = .2f;
+    public float engineLowpitch = 4.0f;
     public float maxMotorTorque = 1500f;
     public float maxSteeringAngle = 30f;
     public float reverseTorque = 1500f;
@@ -21,6 +34,10 @@ public class CarController : MonoBehaviour
     public AnimationCurve torqueCurve; // RPM (0–1) -> Torque (0–1)
 
     private float engineRPM;
+
+    [Header("Audio")]
+    public AudioSource engineSource;
+    public AudioSource tireSlipSource;
 
 
     [Header("Wheel References")]
@@ -84,16 +101,47 @@ public class CarController : MonoBehaviour
     {
         HandleInput();
         UpdateWheelVisuals();
-        ApplySteering();
+        ApplySteering(); 
+        HandleEngineSound();
     }
 
     private void FixedUpdate()
     {
         CalculateEngineRPM();
+        CalculateSpeed();
         ApplyMotor();
-        ApplyHandbrake();
+        ApplyHandbrake(); 
+        HandleTireSounds();
         //ApplyDrift();
     }
+
+    void CalculateSpeed()
+    {
+        speed = rb.linearVelocity.magnitude;
+    }
+
+    void HandleEngineSound()
+    {
+        float rpm01 = engineRPM / maxRPM;
+
+        engineSource.pitch = Mathf.Lerp(engineLowpitch, engineHighpitch, rpm01);
+        engineSource.volume = Mathf.Lerp(0.4f, 1f, rpm01);
+    }
+
+    void HandleTireSounds()
+    {
+        WheelHit hit;
+        bool slipping = false;
+
+        if (rearLeftCollider.GetGroundHit(out hit))
+            slipping |= Mathf.Abs(hit.sidewaysSlip) > 0.3f || Mathf.Abs(hit.forwardSlip) > 0.4f;
+
+        if (rearRightCollider.GetGroundHit(out hit))
+            slipping |= Mathf.Abs(hit.sidewaysSlip) > 0.3f || Mathf.Abs(hit.forwardSlip) > 0.4f;
+
+        tireSlipSource.volume = slipping ? Mathf.Clamp01(rb.linearVelocity.magnitude / 200f) : 0f;
+    }
+
 
     void CalculateEngineRPM()
     {
@@ -109,6 +157,7 @@ public class CarController : MonoBehaviour
 
     void ApplyHandbrake()
     {
+        tireSlipSource.volume = handbrake ? 1f : 0f;
         if (handbrake)
         {
             rearLeftCollider.brakeTorque = handbrakeTorque;
@@ -222,7 +271,7 @@ public class CarController : MonoBehaviour
         frontRightCollider.brakeTorque = 0f;
         rearLeftCollider.brakeTorque = 0f;
         rearRightCollider.brakeTorque = 0f;
-
+        //tireSlipSource.volume = throttle == -1 ? 1f : 0f;
         float rpmNormalized = engineRPM / maxRPM;
         float torqueFromCurve = torqueCurve.Evaluate(rpmNormalized);
 
@@ -267,6 +316,9 @@ public class CarController : MonoBehaviour
     }
     void OnGUI()
     {
+        float displaySpeed = useKMH ? speed * 3.6f : speed * 2.23694f;
+        string unit = useKMH ? "km/h" : "mph";
+
         GUI.Label(new Rect(10, 10, 200, 20),
             isReverse ? "Gear: R" : $"Gear: {currentGear}");
 
@@ -274,20 +326,45 @@ public class CarController : MonoBehaviour
             $"RPM: {(int)engineRPM}");
 
         GUI.Label(new Rect(10, 50, 300, 20),
+            $"Speed: {(int)displaySpeed} {unit}");
+
+        GUI.Label(new Rect(10, 70, 300, 20),
             $"Nitro: {(int)(nitroTimer / nitroDuration * 100f)}%");
     }
+
 
 
     void ApplySteering()
     {
         frontLeftCollider.steerAngle = currentSteerAngle;
         frontRightCollider.steerAngle = currentSteerAngle;
-        if (currentSteerAngle >= 0)
-            playerCamera.transform.rotation = Quaternion.Euler(20 + transform.rotation.eulerAngles.x, 2f * (float)Math.Sqrt(currentSteerAngle) + transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-        else
-            playerCamera.transform.rotation = Quaternion.Euler(20 + transform.rotation.eulerAngles.x, -2f * (float)Math.Sqrt(-currentSteerAngle) + transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-        playerCamera.transform.localPosition = -0.03f * currentSteerAngle * Vector3.right + Vector3.up * 2.5f + Vector3.forward * -5f;
+
+        float speed01 = Mathf.Clamp01(speed / maxSpeedForFOV);
+
+        // FOV effect
+        playerCamera.fieldOfView = Mathf.Lerp(minFOV, maxFOV, speed01);
+
+        // Camera pull-back effect
+        Vector3 baseOffset =
+            Vector3.up * 2.5f +
+            Vector3.back * 5f;
+
+        Vector3 speedOffset = Vector3.back * (speed01 * maxCameraBackOffset);
+
+        // Steering sway
+        Vector3 steerOffset = -0.03f * currentSteerAngle * Vector3.right;
+
+        playerCamera.transform.localPosition =
+            baseOffset + speedOffset + steerOffset;
+
+        // Small yaw rotation based on steering
+        playerCamera.transform.rotation = Quaternion.Euler(
+            20f,
+            transform.eulerAngles.y + currentSteerAngle * 0.15f,
+            0f
+        );
     }
+
 
     void ApplyDrift()
     {
