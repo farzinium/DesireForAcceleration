@@ -34,7 +34,7 @@ public class CarController : MonoBehaviour
     public AnimationCurve torqueCurve; // RPM (0–1) -> Torque (0–1)
 
     private float engineRPM;
-
+    private float deltaTime;
     [Header("Audio")]
     public AudioSource engineSource;
     public AudioSource tireSlipSource;
@@ -103,6 +103,7 @@ public class CarController : MonoBehaviour
         UpdateWheelVisuals();
         ApplySteering(); 
         HandleEngineSound();
+        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
     }
 
     private void FixedUpdate()
@@ -330,6 +331,11 @@ public class CarController : MonoBehaviour
 
         GUI.Label(new Rect(10, 70, 300, 20),
             $"Nitro: {(int)(nitroTimer / nitroDuration * 100f)}%");
+        
+        float fps = 1f / deltaTime;
+
+        GUI.Label(new Rect(Screen.width - 100, 10, 100, 20),
+            $"FPS: {(int)fps}");
     }
 
 
@@ -355,12 +361,12 @@ public class CarController : MonoBehaviour
         Vector3 steerOffset = -0.03f * currentSteerAngle * Vector3.right;
 
         playerCamera.transform.localPosition =
-            baseOffset + speedOffset + steerOffset;
+            baseOffset + speedOffset;
 
         // Small yaw rotation based on steering
         playerCamera.transform.rotation = Quaternion.Euler(
             20f,
-            transform.eulerAngles.y + currentSteerAngle * 0.15f,
+            transform.eulerAngles.y + currentSteerAngle * 0.05f,
             0f
         );
     }

@@ -12,6 +12,8 @@ public class RoadSegment : MonoBehaviour
     [Range(0f, 200f)]
     public float speedLimit = 120f;
 
+    public List<float> knotWidths = new();
+
     [Range(6f, 30f)]
     public float width = 12f;
 

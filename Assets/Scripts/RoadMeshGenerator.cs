@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(SplineContainer))]
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
-[ExecuteAlways]
+[ExecuteInEditMode]
 public class RoadMeshGenerator : MonoBehaviour
 {
     [Header("Roads")]
@@ -39,13 +39,27 @@ public class RoadMeshGenerator : MonoBehaviour
             mesh = mf.sharedMesh;
         }
 
-        Generate();
+        //Generate();
     }
 
     void OnValidate()
     {
         Generate();
     }
+
+    float EvaluateWidth(float t)
+    {
+        if (road.knotWidths == null || road.knotWidths.Count == 0)
+            return road.width;
+
+        float scaled = t * (road.knotWidths.Count - 1);
+        int i0 = Mathf.FloorToInt(scaled);
+        int i1 = Mathf.Clamp(i0 + 1, 0, road.knotWidths.Count - 1);
+        float lerp = scaled - i0;
+
+        return Mathf.Lerp(road.knotWidths[i0], road.knotWidths[i1], lerp);
+    }
+
 
     public void Generate()
     {
@@ -54,8 +68,7 @@ public class RoadMeshGenerator : MonoBehaviour
 
         mesh.Clear();
 
-        var spline = container.Splines[0];
-        float width = road.width * 0.5f;
+        var spline = container.Splines[0]; 
 
         List<Vector3> verts = new();
         List<int> tris = new();
@@ -64,6 +77,7 @@ public class RoadMeshGenerator : MonoBehaviour
         for (int i = 0; i <= segments; i++)
         {
             float t = i / (float)segments;
+            float width = EvaluateWidth(t) * 0.5f;
 
             Vector3 center = spline.EvaluatePosition(t);
             Vector3 tangent = ((Vector3)spline.EvaluateTangent(t)).normalized;

@@ -1,0 +1,102 @@
+{
+	"trackId": "mountain_ring",
+	"trackName": "Mountain Ring",
+	"zoneSize": 120,
+	"roads": [
+		{
+			"roadId": "ring_01",
+			"driving": {
+				"speedLimit": 160,
+				"width": 10,
+				"driftAffinity": 0.8,
+				"allowsRaces": true,
+				"isHighway": false,
+				"defaultBank": 6
+			},
+			"mesh": {
+				"segments": 200,
+				"thickness": 0.25,
+				"curbWidth": 0.6,
+				"curbHeight": 0.15
+			},
+			"spline": {
+				"closed": true,
+				"knots": [
+					{
+						"position":
+						{
+							"x": 0.0,
+							"y": 0.0,
+							"z": 0.0
+						},
+						"tangentIn": {
+								"x": 0.0,
+								"y": 0.0,
+								"z": -6.965630531311035
+						},
+						"tangentOut": {
+								"x": 0.0,
+								"y": 0.0,
+								"z": 6.965630531311035
+						},
+						"rotation": {
+								"x": 0.0,
+								"y": -0.42914286255836489,
+								"z": 0.0,
+								"w": 0.9032366275787354
+						},
+						"width": 10.0
+					},
+					{
+							"position": {
+									"x": 0.0,
+									"y": 0.0,
+									"z": 25.0
+							},
+							"tangentIn": {
+									"x": -2.4496078491210939,
+									"y": 0.0,
+									"z": -2.789161205291748
+							},
+							"tangentOut": {
+									"x": 0.0,
+									"y": 0.0,
+									"z": 1.979090929031372
+							},
+							"rotation": {
+									"x": 0.0,
+									"y": 0.6154124140739441,
+									"z": 0.0,
+									"w": 0.7882052659988403
+							},
+							"width": 10.0
+					},
+					{
+							"position": {
+									"x": 25.0,
+									"y": 0.0,
+									"z": 0.0
+							},
+							"tangentIn": {
+									"x": 0.9699993133544922,
+									"y": 0.0,
+									"z": 3.509999990463257
+							},
+							"tangentOut": {
+									"x": -1.9699993133544922,
+									"y": 0.0,
+									"z": -6.440000057220459
+							},
+							"rotation": {
+									"x": 0.0,
+									"y": 0.0,
+									"z": 0.0,
+									"w": 1.0
+							},
+							"width": 10.0
+					}
+			]
+			}
+		}
+	]
+}
