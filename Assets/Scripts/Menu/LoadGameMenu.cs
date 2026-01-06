@@ -19,7 +19,7 @@ public class LoadGameMenu : MonoBehaviour
         foreach (string file in files)
         {
             string name = Path.GetFileNameWithoutExtension(file);
-            GameObject btn = Instantiate(buttonPrefab, content );
+            GameObject btn = Instantiate(buttonPrefab, content);
             btn.GetComponentInChildren<TextMeshProUGUI>().text = name;
             btn.GetComponent<Button>().onClick.AddListener(() => LoadGame(file));
             index++;

@@ -1,0 +1,205 @@
+fileFormatVersion: 2
+guid: d0043fba38cc5ff4f8419538df709714
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021BadgeA_Material1
+    second: {fileID: 2100000, guid: a1241a6d3b1f07a45bd290a19e647432, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021Base_Material1
+    second: {fileID: 2100000, guid: eabb90613f873834db689fa907caa8ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021Carbon1_Material1
+    second: {fileID: 2100000, guid: 1f7b3bf90fe4da44690fd829e1c1a411, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021Coloured_Material_004
+    second: {fileID: 2100000, guid: d216000864544bb4ca18ef56f1fbff5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021EngineA_Material1
+    second: {fileID: 2100000, guid: 58ec96aeaacb7e244b453dac414999b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021GrilleAlpha1A_Material1
+    second: {fileID: 2100000, guid: 2d7584363df93154a9b13fd3d7ec9bf7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021GrilleNoAlpha2A_Material1
+    second: {fileID: 2100000, guid: 1db94e5b2d3b8644e925cf43dfe0747d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021GrilleNoAlpha5A_Material1
+    second: {fileID: 2100000, guid: 91c39a6c80529fc42898a9e0be5a26d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021GrilleNoAlpha6A_Material1
+    second: {fileID: 2100000, guid: 303de573da3ac0040ba4903516ee551d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021GrilleNoAlpha7A_Material1
+    second: {fileID: 2100000, guid: 01668264cae3fe04fa12545a8fd39994, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021GrilleNoAlpha8A_Material1
+    second: {fileID: 2100000, guid: df317f4a53bb5014c9a70a42db504b62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021GrilleNoAlpha9A_Material1
+    second: {fileID: 2100000, guid: f24af245fba126a49a1714768d743adf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021InteriorA_Material1
+    second: {fileID: 2100000, guid: accf3e6d940d7794eb6f7fed233ba8a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021LightA_Material1
+    second: {fileID: 2100000, guid: 6875af8246ac1a04b877eb88a174aea7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021ManufacturerPlateA_Material1
+    second: {fileID: 2100000, guid: 28c5a1d637489f74b8b4ad176efde642, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021PaintTNR_Material_004
+    second: {fileID: 2100000, guid: eabb90613f873834db689fa907caa8ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bBMW_M4CompetitionG82TNR0_2021Window_Material1
+    second: {fileID: 2100000, guid: 926a2ed66512dc04abfdfb526fbeee2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong2
+    second: {fileID: 2100000, guid: f6de49ab38f382a45abf0feb7a25d73d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red_glass
+    second: {fileID: 2100000, guid: 74a362ea4b4c48f43aab8b55d3c68ea3, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 100
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
