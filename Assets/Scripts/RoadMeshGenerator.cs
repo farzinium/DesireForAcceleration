@@ -28,18 +28,11 @@ public class RoadMeshGenerator : MonoBehaviour
         meshCollider = GetComponent<MeshCollider>();
 
         var mf = GetComponent<MeshFilter>();
-        if (mf.sharedMesh == null)
-        {
-            mesh = new Mesh();
-            mesh.name = "RoadMesh";
-            mf.sharedMesh = mesh;
-        }
-        else
-        {
-            mesh = mf.sharedMesh;
-        }
+        mesh = new();
+        mesh.name = "RoadMesh_Instance";
+        mf.mesh = mesh; // IMPORTANT: use mesh, not sharedMesh
 
-        //Generate();
+        Generate();
     }
 
     void OnValidate()
